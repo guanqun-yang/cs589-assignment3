@@ -1,9 +1,13 @@
 import os
+import time
 import shutil
 import hashlib
 import pathlib
 
 import pandas as pd
+
+def get_system_time():
+    return str(time.time()).split(".")[0]
 
 def sha256sum(filename):
     h  = hashlib.sha256()
@@ -20,6 +24,7 @@ def post_processing():
     for filename in os.listdir("submission"):
         l.append({
             "name": filename,
+            "time": get_system_time(),
             "sha256": sha256sum(f"submission/{filename}")
         })
 
