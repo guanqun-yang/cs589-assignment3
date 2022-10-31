@@ -3,7 +3,7 @@ import shutil
 import hashlib
 import pathlib
 
-save_path = pathlib.Path("submission")
+import pandas as pd
 
 def sha256sum(filename):
     h  = hashlib.sha256()
@@ -17,13 +17,13 @@ def sha256sum(filename):
 def post_processing():    
     # hashing each data file
     l = list()
-    for filename in os.listdir(save_path):
+    for filename in os.listdir("submission"):
         l.append({
             "name": filename,
-            "sha256": sha256sum(save_path / filename)
+            "sha256": sha256sum("submission/{filename}")
         })
 
-    pd.DataFrame(l).to_pickle(save_path / "fingerprint.pkl")
+    pd.DataFrame(l).to_pickle("submission/fingerprint.pkl")
 
     # zipping submission/ directory
     shutil.make_archive("submission", "zip", save_path)
