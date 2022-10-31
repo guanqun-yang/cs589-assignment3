@@ -26,4 +26,4 @@ def post_processing():
     pd.DataFrame(l).to_pickle("submission/fingerprint.pkl")
 
     # zipping submission/ directory
-    shutil.make_archive("submission", "zip", save_path)
+    shutil.make_archive("submission", "zip", "submission")
