@@ -1,6 +1,9 @@
 import os
 import shutil
 import hashlib
+import pathlib
+
+save_path = pathlib.Path("submission")
 
 def sha256sum(filename):
     h  = hashlib.sha256()
