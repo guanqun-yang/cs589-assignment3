@@ -20,7 +20,7 @@ def post_processing():
     for filename in os.listdir("submission"):
         l.append({
             "name": filename,
-            "sha256": sha256sum("submission/{filename}")
+            "sha256": sha256sum(f"submission/{filename}")
         })
 
     pd.DataFrame(l).to_pickle("submission/fingerprint.pkl")
