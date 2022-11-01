@@ -4,10 +4,15 @@ import shutil
 import hashlib
 import pathlib
 
+import numpy as np
 import pandas as pd
 
-def get_system_time():
-    return str(time.time()).split(".")[0]
+
+def seed_everything(seed=0):
+    random.seed(seed)
+    os.environ['PYTHONHASHSEED'] = str(seed)
+    np.random.seed(seed)
+
 
 def sha256sum(filename):
     h  = hashlib.sha256()
@@ -18,13 +23,14 @@ def sha256sum(filename):
             h.update(mv[:n])
     return h.hexdigest()
 
+
 def post_processing():    
     # hashing each data file
     l = list()
     for filename in os.listdir("submission"):
         l.append({
             "name": filename,
-            "time": get_system_time(),
+            "time": time.time(),
             "sha256": sha256sum(f"submission/{filename}")
         })
 
